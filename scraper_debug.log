@@ -1,0 +1,31 @@
+2025-04-04 02:01:31,886 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:1013
+2025-04-04 02:01:31,887 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 02:01:31,893 - INFO -  * Restarting with stat
+2025-04-04 02:01:33,757 - WARNING -  * Debugger is active!
+2025-04-04 02:01:33,777 - INFO -  * Debugger PIN: 971-742-124
+2025-04-04 02:01:42,222 - INFO - 127.0.0.1 - - [04/Apr/2025 02:01:42] "GET / HTTP/1.1" 200 -
+2025-04-04 02:01:49,289 - INFO - 127.0.0.1 - - [04/Apr/2025 02:01:49] "GET /part-search/2000 HTTP/1.1" 200 -
+2025-04-04 02:01:49,312 - INFO - 127.0.0.1 - - [04/Apr/2025 02:01:49] "GET /products/2000 HTTP/1.1" 200 -
+2025-04-04 02:01:49,434 - INFO - Killing chrome.exe (PID: 244)
+2025-04-04 02:01:51,479 - INFO - Killing chrome.exe (PID: 464)
+2025-04-04 02:01:53,481 - INFO - Killing chrome.exe (PID: 484)
+2025-04-04 02:01:55,633 - INFO - Killing chrome.exe (PID: 724)
+2025-04-04 02:01:57,634 - INFO - Killing chrome.exe (PID: 768)
+2025-04-04 02:01:59,758 - INFO - Killing chrome.exe (PID: 964)
+2025-04-04 02:02:01,760 - INFO - Killing chrome.exe (PID: 1072)
+2025-04-04 02:02:04,045 - INFO - Killing chrome.exe (PID: 1352)
+2025-04-04 02:02:06,147 - INFO - Killing chrome.exe (PID: 1448)
+2025-04-04 02:02:08,344 - INFO - Killing chrome.exe (PID: 1568)
+2025-04-04 02:02:10,637 - INFO - Killing chrome.exe (PID: 1904)
+2025-04-04 02:02:12,693 - INFO - Killing chrome.exe (PID: 1932)
+2025-04-04 02:02:14,796 - INFO - Killing chrome.exe (PID: 1960)
+2025-04-04 02:02:17,322 - INFO - Killing chrome.exe (PID: 2656)
+2025-04-04 02:02:19,390 - INFO - Killing chrome.exe (PID: 2736)
+2025-04-04 02:02:21,609 - INFO - Killing chrome.exe (PID: 2920)
+2025-04-04 02:02:23,802 - INFO - Killing chrome.exe (PID: 3016)
+2025-04-04 02:02:25,804 - INFO - Killing chrome.exe (PID: 3048)
+2025-04-04 02:02:27,843 - INFO - Killing chrome.exe (PID: 3080)
+2025-04-04 02:02:30,032 - INFO - Killing chrome.exe (PID: 3312)
+2025-04-04 02:02:31,245 - INFO -  * Detected change in 'c:\\Users\\fuzzitech\\Desktop\\New folder (10)\\partScraper.py', reloading
+2025-04-04 02:02:31,473 - INFO -  * Restarting with stat

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2c3e50;
+            --background-color: #f0f4f8;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --text-light: #7f8c8d;
+            --border-color: #e0e0e0;
+            --success-color: #27ae60;
+            --success-dark: #229954;
+            --error-color: #e74c3c;
+            --table-stripe: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background-color: var(--card-background);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: var(--card-background);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--card-background);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--table-stripe);
+        }
+
+        .spinner-container {
+        margin-bottom: 2rem;
+        text-align: center;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--border-color);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            background-color: var(--error-color);
+            color: var(--card-background);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .add-to-cart {
+            background-color: var(--success-color);
+            color: var(--card-background);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--success-dark);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .logout-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--error-color);
+            color: var(--card-background);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-link:hover {
+            background-color: #d32f2f;
+        }
+
+        .logout-link::before {
+            content: "\1F511";
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+        /*cart css*/
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        #cart-count {
+            background-color: var(--error-color);
+            color: white;
+            font-size: 0.9rem;
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .cart-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-background);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 300px;
+            display: none;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .cart-dropdown h3 {
+            margin-top: 0;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-total {
+            margin-top: 1rem;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        .checkout-button {
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .checkout-button:hover {
+            background-color: var(--success-dark);
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        {% endif %}
+        <div id="cart-icon-container" class="cart-icon-container">
+            🛒 <span id="cart-count">0</span>
+            <div id="cart-dropdown" class="cart-dropdown">
+                <h3>Cart Items</h3>
+                <ul id="cart-items"></ul>
+                <div class="cart-total">
+                    <strong>Total:</strong> $<span id="cart-total">0.00</span>
+                </div>
+                <button id="checkout-button" class="checkout-button">Checkout</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Products</h1>
+        <h3>Searching for Part Number: {{ data }}</h3>
+        
+        <div id="search-status">Initializing search...</div>
+        <div id="search-progress-container">
+            <div id="search-progress"></div>
+        </div>
+        
+        <div id="vendor-sections">
+            <!-- Individual vendor sections will be created here -->
+            <div id="igc-section" class="vendor-section">
+                <h2>IGC Data</h2>
+                <div id="igc-content" class="vendor-content">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            
+            <div id="pgw-section" class="vendor-section">
+                <h2>PGW Data</h2>
+                <div id="pgw-content" class="vendor-content">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            
+            <div id="pilkington-section" class="vendor-section">
+                <h2>Pilkington Data</h2>
+                <div id="pilkington-content" class="vendor-content">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            
+            <div id="mygrant-section" class="vendor-section">
+                <h2>MyGrant Data</h2>
+                <div id="mygrant-content" class="vendor-content">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const partNumber = '{{ data }}';
+        const dataSources = ['IGC', 'PGW', 'Pilkington', 'MyGrant'];
+        const searchStatus = document.getElementById('search-status');
+        const searchProgress = document.getElementById('search-progress');
+        
+        // Track how many vendors have completed
+        let completedVendors = 0;
+        
+        // Update the progress bar
+        function updateProgress() {
+            const percentage = Math.floor((completedVendors / dataSources.length) * 100);
+            searchProgress.style.width = `${percentage}%`;
+            searchProgress.textContent = `${percentage}%`;
+            
+            if (completedVendors === dataSources.length) {
+                searchStatus.textContent = 'Search complete!';
+            }
+        }
+        
+        // Function to create a table for a vendor's results
+        function createTable(data, vendorName) {
+            // Mark this vendor as completed
+            completedVendors++;
+            updateProgress();
+            
+            // Find the vendor's content container
+            const vendorContent = document.getElementById(`${vendorName.toLowerCase()}-content`);
+            
+            // Clear the spinner
+            vendorContent.innerHTML = '';
+            
+            // If no data or empty array, show a message
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message';
+                message.textContent = `No data available for the specified part number on ${vendorName} site.`;
+                vendorContent.appendChild(message);
+                return;
+            }
+            
+            // Create table
+            const table = document.createElement('table');
+            const thead = table.createTHead();
+            const tbody = table.createTBody();
+            const headerRow = thead.insertRow();
+
+            // Create table headers
+            Object.keys(data[0]).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            });
+
+            // Add "Add to Cart" header
+            const th = document.createElement('th');
+            th.textContent = 'Add to Cart';
+            headerRow.appendChild(th);
+
+            // Populate table with data
+            data.forEach(item => {
+                const row = tbody.insertRow();
+                
+                // Add all the item data
+                Object.values(item).forEach(value => {
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
+
+                // Create the "Add to Cart" button
+                const buttonCell = row.insertCell();
+                const button = document.createElement('button');
+                button.textContent = 'Add to Cart';
+                button.className = 'add-to-cart';
+                button.onclick = () => {
+                    // Handle the add to cart action here
+                    addToCart(item);
+                    alert(`Added to cart: ${Object.values(item).join(', ')}`);
+                };
+                buttonCell.appendChild(button);
+            });
+
+            // Add the table to the vendor content
+            vendorContent.appendChild(table);
+            
+            // Add a timestamp to show when results appeared
+            const timestamp = document.createElement('div');
+            timestamp.className = 'timestamp';
+            timestamp.textContent = `Results received at ${new Date().toLocaleTimeString()}`;
+            vendorContent.appendChild(timestamp);
+        }
+
+        // Start the streaming fetch
+        searchStatus.textContent = `Searching for part ${partNumber}...`;
+        updateProgress(); // Initialize progress bar
+        
+        fetch(`/products/${partNumber}`)
+            .then(response => {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                function readStream() {
+                    return reader.read().then(({ done, value }) => {
+                        if (done) {
+                            // Process any remaining data in the buffer
+                            if (buffer.trim()) {
+                                try {
+                                    const data = JSON.parse(buffer);
+                                    processResult(data);
+                                } catch (error) {
+                                    console.error('Error parsing JSON from remaining buffer:', error);
+                                }
+                            }
+                            
+                            // Ensure any vendors that didn't return data are marked as complete
+                            dataSources.forEach(vendor => {
+                                const vendorContent = document.getElementById(`${vendor.toLowerCase()}-content`);
+                                if (vendorContent.querySelector('.spinner')) {
+                                    // This vendor hasn't been processed yet
+                                    completedVendors++;
+                                    vendorContent.innerHTML = '<div class="message">No results received</div>';
+                                }
+                            });
+                            
+                            updateProgress();
+                            return;
+                        }
+                        
+                        // Decode the chunk and add to buffer
+                        const chunk = decoder.decode(value, { stream: true });
+                        buffer += chunk;
+                        
+                        // Process complete lines in the buffer
+                        let lineEndIndex;
+                        while ((lineEndIndex = buffer.indexOf('\n')) !== -1) {
+                            const line = buffer.substring(0, lineEndIndex).trim();
+                            buffer = buffer.substring(lineEndIndex + 1);
+                            
+                            if (line) {
+                                try {
+                                    const data = JSON.parse(line);
+                                    processResult(data);
+                                } catch (error) {
+                                    console.error('Error parsing JSON:', error, line);
+                                }
+                            }
+                        }
+                        
+                        return readStream();
+                    });
+                }
+                
+                function processResult(data) {
+                    // Check if it's a status message
+                    if (data.status) {
+                        searchStatus.textContent = data.message;
+                        return;
+                    }
+                    
+                    // Regular vendor data
+                    const vendor = Object.keys(data)[0];
+                    const vendorData = data[vendor];
+                    
+                    // Log when we receive data from a vendor
+                    console.log(`Received ${vendor} data at ${new Date().toLocaleTimeString()}`);
+                    
+                    // Process the vendor data immediately
+                    createTable(vendorData, vendor);
+                }
+                
+                return readStream();
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                searchStatus.textContent = `Error: ${error.message}`;
+                
+                // Mark all vendors as complete with error messages
+                dataSources.forEach(vendor => {
+                    const vendorContent = document.getElementById(`${vendor.toLowerCase()}-content`);
+                    if (vendorContent.querySelector('.spinner')) {
+                        vendorContent.innerHTML = '<div class="error-message">Error loading data</div>';
+                        completedVendors++;
+                    }
+                });
+                
+                updateProgress();
+            });
+
+        /*cart javascript*/
+
+        // Global cart array
+        let cart = [];
+
+        // Add to Cart Function
+        function addToCart(item) {
+            // Check if item exists in the cart
+            const existingItem = cart.find(cartItem => 
+                cartItem["Part Number"] === item["Part Number"] && 
+                cartItem.Description === item.Description
+            );
+
+            if (existingItem) {
+                existingItem.quantity += 1; // Increment quantity
+            } else {
+                cart.push({ ...item, quantity: 1 }); // Add new item with quantity
+            }
+
+            updateCartUI(); // Refresh cart UI
+            console.log('Cart after adding item:', cart); // Debugging output
+        }
+
+        // Update Cart UI Function
+        function updateCartUI() {
+            // Update Cart Count
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+
+            // Update Cart Dropdown
+            const cartItemsList = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+
+            // Clear existing items
+            cartItemsList.innerHTML = '';
+
+            // Add each item to the dropdown
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                
+                // Extract price from item (it might be in different fields depending on the vendor)
+                let price = 0;
+                if (item.Price) {
+                    // Try to extract numeric value from price string (like "$199.99")
+                    const priceMatch = item.Price.match(/\$?(\d+(\.\d+)?)/);
+                    price = priceMatch ? parseFloat(priceMatch[1]) : 0;
+                }
+                
+                li.innerHTML = `
+                    <span>${item["Part Number"]} (${item.quantity})</span>
+                    <span>$${(price * item.quantity).toFixed(2)}</span>
+                `;
+                cartItemsList.appendChild(li);
+
+                total += price * item.quantity;
+            });
+
+            // Update Total Price
+            cartTotalElement.textContent = total.toFixed(2);
+        }
+        
+        const cartIconContainer = document.getElementById('cart-icon-container');
+        const cartDropdown = document.getElementById('cart-dropdown');
+
+        // Toggle Cart Dropdown
+        cartIconContainer.onclick = () => {
+            cartDropdown.style.display =
+                cartDropdown.style.display === 'block' ? 'none' : 'block';
+        };
+    </script>
+</body>
+</html>
