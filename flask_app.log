@@ -1,0 +1,331 @@
+2025-04-10 22:08:14,336 - INFO - Pre-initializing 10 browser instances
+2025-04-10 22:08:14,344 - INFO - Serving on http://0.0.0.0:8000
+2025-04-10 22:08:21,061 - INFO - patching driver executable C:\Users\fuzzitech\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-04-10 22:08:21,713 - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: user.last_seen
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\app.py", line 386, in before_request
+    if current_user.is_authenticated:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\werkzeug\local.py", line 318, in __get__
+    obj = instance._get_current_object()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\werkzeug\local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ~~~~~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\app.py", line 379, in load_user
+    return db.session.get(User, int(user_id))
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 1058, in get
+    return self._proxied.get(
+           ~~~~~~~~~~~~~~~~~^
+        entity,
+        ^^^^^^^
+    ...<6 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 3694, in get
+    return self._get_impl(
+           ~~~~~~~~~~~~~~^
+        entity,
+        ^^^^^^^
+    ...<7 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 3874, in _get_impl
+    return db_load_fn(
+        self,
+    ...<5 lines>...
+        bind_arguments=bind_arguments,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+    ~~~~~~~~~~~~~~~^
+        q,
+        ^^
+    ...<2 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.last_seen
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password AS user_password, user.is_admin AS user_is_admin, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.id = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-10 22:08:22,690 - INFO - setting properties for headless
+2025-04-10 22:08:22,695 - INFO - Chrome driver set up in 8.35s
+2025-04-10 22:08:23,276 - INFO - setting properties for headless
+2025-04-10 22:08:23,279 - INFO - Chrome driver set up in 0.58s
+2025-04-10 22:08:23,845 - INFO - setting properties for headless
+2025-04-10 22:08:23,849 - INFO - Chrome driver set up in 0.57s
+2025-04-10 22:08:23,849 - INFO - Finished pre-initializing browser instances, pool size: 3
+2025-04-10 22:08:24,223 - ERROR - Exception on /login [GET]
+Traceback (most recent call last):
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: user.last_seen
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\app.py", line 386, in before_request
+    if current_user.is_authenticated:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\werkzeug\local.py", line 318, in __get__
+    obj = instance._get_current_object()
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\werkzeug\local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ~~~~~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\flask_login\login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\app.py", line 379, in load_user
+    return db.session.get(User, int(user_id))
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 1058, in get
+    return self._proxied.get(
+           ~~~~~~~~~~~~~~~~~^
+        entity,
+        ^^^^^^^
+    ...<6 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 3694, in get
+    return self._get_impl(
+           ~~~~~~~~~~~~~~^
+        entity,
+        ^^^^^^^
+    ...<7 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 3874, in _get_impl
+    return db_load_fn(
+        self,
+    ...<5 lines>...
+        bind_arguments=bind_arguments,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+    ~~~~~~~~~~~~~~~^
+        q,
+        ^^
+    ...<2 lines>...
+        bind_arguments=bind_arguments,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\fuzzitech\Desktop\New folder (10)\myenv\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.last_seen
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password AS user_password, user.is_admin AS user_is_admin, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.id = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-10 22:19:02,759 - INFO - ensuring close
+2025-04-10 22:19:02,760 - INFO - ensuring close
+2025-04-10 22:19:02,760 - INFO - ensuring close
+2025-04-10 22:19:02,761 - INFO - Cleaning up driver resources...
+2025-04-10 22:19:02,763 - INFO - Driver resources cleaned up
